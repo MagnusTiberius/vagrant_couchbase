@@ -2,7 +2,7 @@
 Vagrant provision script for ubuntu/trusty64
 
 Vagrant Box location: 
-https://app.vagrantup.com/MagnusTiberius/boxes/couchbase_golang
+https://app.vagrantup.com/MagnusTiberius/boxes/Couchbase
 
 The following items are in the provision:
 
