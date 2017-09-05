@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
-  config.vm.provision "shell", path: "https://raw.githubusercontent.com/MagnusTiberius/vagrant_provision/master/setupbox.sh"
+  config.vm.provision "shell", path: "https://raw.githubusercontent.com/MagnusTiberius/vagrant_couchbase/master/setupbox.sh"
 
 
   # Create a forwarded port mapping which allows access to a specific port
