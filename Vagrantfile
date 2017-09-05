@@ -8,25 +8,10 @@ tee "/etc/profile.d/myvars.sh" > "/dev/null" <<EOF
 export GOROOT="/usr/local/go"
 export GOPATH="/home/vagrant/golocal"
 export PATH="$PATH:$GOROOT/bin:%GOPATH/bin"
-export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 EOF
 SCRIPT
 
-$install_go_apps_script = <<-SCRIPT
-go get -u github.com/golang/protobuf/proto
-go get -u github.com/golang/protobuf/protoc-gen-go
-go get -u google.golang.org/grpc
-go get -u github.com/go-swagger/go-swagger/cmd/swagger
-go get -u github.com/spf13/cobra/cobra
-go get -u go.uber.org/zap
-go get -u github.com/golang/dep/cmd/dep
-SCRIPT
 
-
-$run_daemons = <<-SCRIPT
-sudo dockerd &
-sudo docker run -d -p 8091-8093:8091-8093 -p 11210:11210 couchbase
-SCRIPT
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -49,8 +34,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: $set_environment_variables, run: "always"
   config.vm.provision "shell", path: "https://raw.githubusercontent.com/MagnusTiberius/vagrant_provision/master/setupbox.sh"
-  #config.vm.provision "shell", inline: $run_daemons, run: "always"
-  config.vm.provision "shell", inline: $install_go_apps_script, privileged: false
 
 
   # Create a forwarded port mapping which allows access to a specific port
